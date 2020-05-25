@@ -3,30 +3,91 @@
     <head>
     </head>
     <body>
+        <div>
+        <button type = "button" id = 'button'>Reset</button>
+        </div>
         <div id = "container">
             
         </div>
+        <div id = testid>
+
+        </div>
         <script>
+            
+            let squareDimension = 20;
+            
+            let numberOfSquaresWidth = 16;
+            let numberOfSquaresHeight = 16;
+            let containerWidth = numberOfSquaresWidth*squareDimension;
+            let containerHeight = numberOfSquaresHeight*squareDimension;
+            
             const container = document.querySelector('#container');
             container.style.display = 'flex';
-            container.style.flexDirection = 'column';
+            container.style.flexDirection = 'row';
+            container.style.flexFlow = 'row wrap';
+            container.style.width = `${containerWidth}px`;
+            container.style.height = `${containerHeight}px`
+            container.style.alignItems = 'stretch';
+            container.style.borderStyle = 'solid';
+            container.style.borderColor = 'black';
+            container.style.position = 'relative';
+
             
-            const first = document.createElement('div');
-            first.textContent = '1'
-
-            container.appendChild(first);
-
-            const second = document.createElement('div');
-            second.textContent = '2';
-
-            container.appendChild(second);
-
-            const third = document.createElement('div');
-            third.textContent = '3';
-
-            container.appendChild(third);
+            
+            
+            
             
 
+            function createSquare () {
+                
+                const newSquare = document.createElement('div');
+                newSquare.id = 'newSquare';
+                newSquare.style.width = `20px`;
+                newSquare.style.height = `20px`;
+                newSquare.style.backgroundColor = 'rgb(220,220,220)';
+                newSquare.style.borderColor = "black";
+                newSquare.onmouseover = function () {
+                    newSquare.style.backgroundColor = 'black';
+                }
+                
+
+                
+                    
+                
+
+                container.appendChild(newSquare);
+            }
+
+
+            function gridSquares (width, height) {
+                for (let i = 0; i < width*height; i++) {
+                     createSquare(i+1);
+                }
+            }
+
+            
+
+            
+            
+            gridSquares(numberOfSquaresWidth, numberOfSquaresHeight);
+
+            const reset = document.querySelector('#button');
+            
+            
+            const squares = document.querySelectorAll('#newSquare');
+
+            squares.forEach((newSquare) => {
+                reset.addEventListener('click', (e) => {
+                    newSquare.style.backgroundColor = 'rgb(220,220,220)';
+                })
+            })   
+
+            
+                
+
+                
+
+           
             
             
             
