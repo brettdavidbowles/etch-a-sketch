@@ -9,18 +9,16 @@
         <div id = "container">
             
         </div>
-        <div id = testid>
-
-        </div>
+        
         <script>
-            
-            let squareDimension = 20;
-            
-            let numberOfSquaresWidth = 16;
-            let numberOfSquaresHeight = 16;
-            let containerWidth = numberOfSquaresWidth*squareDimension;
-            let containerHeight = numberOfSquaresHeight*squareDimension;
-            
+        
+            let numberOfSquaresWidth = prompt("How many squares across?");
+            let numberOfSquaresHeight = prompt("How many squares tall?");
+            let containerWidth = 960;
+            let containerHeight = 960;
+            let squareWidth = `${containerWidth/numberOfSquaresWidth}px`
+            let squareHeight = `${containerHeight/numberOfSquaresHeight}px`
+
             const container = document.querySelector('#container');
             container.style.display = 'flex';
             container.style.flexDirection = 'row';
@@ -39,21 +37,18 @@
             
 
             function createSquare () {
-                
-                const newSquare = document.createElement('div');
+                let x = 220
+                let newSquare = document.createElement('div');
                 newSquare.id = 'newSquare';
-                newSquare.style.width = `20px`;
-                newSquare.style.height = `20px`;
+                newSquare.style.width = squareWidth;
+                newSquare.style.height = squareHeight;
                 newSquare.style.backgroundColor = 'rgb(220,220,220)';
                 newSquare.style.borderColor = "black";
                 newSquare.onmouseover = function () {
-                    newSquare.style.backgroundColor = 'black';
-                }
-                
-
-                
-                    
-                
+                    x = x-22;
+                    newSquare.style.backgroundColor = `rgb(${x}, ${x}, ${x})`;
+                    return x;
+                }      
 
                 container.appendChild(newSquare);
             }
@@ -75,16 +70,34 @@
             
             
             const squares = document.querySelectorAll('#newSquare');
+            function removeSquares () {
+                while (container.firstChild) {
+    container.removeChild(container.firstChild);
+           
+            }
+            }
 
-            squares.forEach((newSquare) => {
-                reset.addEventListener('click', (e) => {
-                    newSquare.style.backgroundColor = 'rgb(220,220,220)';
-                })
-            })   
 
             
-                
+            function newGridSquares () {
+                let newNumberOfSquaresWidth = prompt('width?');
+                let newNumberOfSquaresHeight = prompt('height?');
+                squareWidth = `${containerWidth/newNumberOfSquaresWidth}px`
+                squareHeight = `${containerHeight/newNumberOfSquaresHeight}px`
+                gridSquares(newNumberOfSquaresWidth, newNumberOfSquaresHeight);
+            }
 
+            reset.addEventListener('click', (e) => {
+               
+                removeSquares();
+                newGridSquares();
+                
+                console.log('test');
+                console.log(container)
+            })  
+            
+
+            
                 
 
            
